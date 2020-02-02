@@ -1,0 +1,15 @@
+{
+  "name": "advanced-promises",
+  "version": "1.0.0",
+  "description": "Advanced promise types",
+  "main": "index.js",
+  "private": true,
+  "devDependencies": {
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^7.0.1",
+    "typescript": "^3.7.5"
+  }
+}
