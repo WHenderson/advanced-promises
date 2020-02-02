@@ -6,7 +6,7 @@ interface ResponseResolve<T> {
 interface ResponseReject {
     reject: any;
 }
-type Response<T> = ResponseResolve<T> | ResponseReject;
+export type Response<T> = ResponseResolve<T> | ResponseReject;
 
 function isResponseResolve<T>(response: Response<T>) : response is ResponseResolve<T> {
     return (response && {}.hasOwnProperty.call(response, 'resolve'));

@@ -1,5 +1,6 @@
 import {OnAbort, OnAbortCallback, OnAbortHandle} from "./OnAbort";
 import {CancellablePromise} from "./CancellablePromise";
+import {CancellableTimeout, Response} from "./CancellableTimeout";
 
 interface AbortablePromiseExecutor<T> {
     (resolve : (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void, onAbort: OnAbort) : void
@@ -11,11 +12,15 @@ export interface AbortablePromise<T> extends Promise<T> {
 
     // Will result in the promise rejecting with the given value
     abortWithReject: (reason?: any) => PromiseLike<void>;
+
+    // Abort with either a resolve or a reject
+    abort: (response?: Response<T>) => PromiseLike<void>;
 }
 
 export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<T> {
     public abortWithResolve: (value?: T | PromiseLike<T>) => PromiseLike<void>;
     public abortWithReject: (reason?: any) => PromiseLike<void>;
+    public abort: (response?: Response<T>) => PromiseLike<void>;
 
     // Handle internal usage in .then etc
     static get [Symbol.species]()
@@ -40,6 +45,35 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
         });
     }
 
+
+    public withTimeout(timeout: CancellableTimeout<T>) : AbortablePromise<T>;
+    public withTimeout(duration: number, response?: Response<T>) : AbortablePromise<T>;
+    public withTimeout(timeout: number | CancellableTimeout<T>, response?: Response<T>) : AbortablePromise<T> {
+        if (typeof timeout === 'number')
+            timeout = new CancellableTimeout<T>(timeout, response);
+
+        const waitTimeout = timeout;
+
+        return AbortablePromise.fromAsync<T>(async (onAbort) => {
+            return onAbort.withHandler(
+                async () => {
+                    return Promise.race([
+                        waitTimeout
+                            .then(async x => {
+                                await this.abort(response);
+                                return x;
+                            }),
+                        this
+                    ]);
+                },
+                async () => {
+                    waitTimeout.cancel();
+                    await this.abort(response);
+                }
+            );
+        });
+    }
+
     // @ts-ignore
     constructor(executor: AbortablePromiseExecutor<T>) {
         // handlers
@@ -49,12 +83,9 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
 
         // create the callee abort api
         const onAbortApi = (cb: OnAbortCallback) => {
-            const p = async () => {
-                if (onAbortApi.isAborted)
-                    await cb();
-                return cb;
-            };
-
+            const p = onAbortApi.isAborted
+                ? Promise.resolve().then(() => cb()).then(() => cb)
+                : cb;
             handlers.push([cb, p]);
             return p;
         };
@@ -66,7 +97,7 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
             get: () => isAborted
         });
         onAbortApi.withHandler = async (callback, handler) => {
-            const handle = onAbortApi(handler);
+            const handle = await onAbortApi(handler);
             try {
                 return await callback(onAbortApi);
             }
@@ -98,35 +129,31 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
             .race([a, p]) as any;
 
         // create the caller abort api
-        r.abortWithResolve = async (value?: T | PromiseLike<T>) => {
+        r.abort = async (response?: Response<T>) => {
             if (isAborted)
                 throw new Error('AbortablePromise already aborted');
             if (isResolved)
                 throw new Error('AbortablePromise already resolved');
 
-            res(value);
+            if (response && 'resolve' in response)
+                res(response.resolve);
+            else if (response && 'reject' in response)
+                rej(response.reject);
+            else
+                res();
 
             isAborted = true;
             await handlers.reduce(async (current, next) => {
                 await current;
-                const [,cb] = next;
+                const [cb,] = next;
                 await cb();
             }, Promise.resolve());
         };
+        r.abortWithResolve = async (value?: T | PromiseLike<T>) => {
+            return r.abort({ resolve: value });
+        };
         r.abortWithReject = async (reason?: any) => {
-            if (isAborted)
-                throw new Error('AbortablePromise already aborted');
-            if (isResolved)
-                throw new Error('AbortablePromise already resolved');
-
-            rej(reason);
-
-            isAborted = true;
-            await handlers.reduce(async (current, next) => {
-                await current;
-                const [,cb] = next;
-                await cb();
-            }, Promise.resolve());
+            return r.abort({ reject: reason });
         };
 
         // This isn't a regular constructor so add the type chain manually
