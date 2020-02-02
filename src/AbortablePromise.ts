@@ -1,4 +1,4 @@
-import {OnAbort, OnAbortCallback} from "./OnAbort";
+import {OnAbort, OnAbortCallback, OnAbortHandle} from "./OnAbort";
 import {CancellablePromise} from "./CancellablePromise";
 
 interface AbortablePromiseExecutor<T> {
@@ -44,16 +44,27 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
     constructor(executor: AbortablePromiseExecutor<T>) {
         // handlers
         const handlers = [];
+        let isAborted = false;
+        let isResolved = false;
 
         // create the callee abort api
         const onAbortApi = (cb: OnAbortCallback) => {
-            handlers.push(cb);
-            return cb;
+            const p = async () => {
+                if (onAbortApi.isAborted)
+                    await cb();
+                return cb;
+            };
+
+            handlers.push([cb, p]);
+            return p;
         };
-        onAbortApi.remove = (cb: OnAbortCallback) => {
-            handlers.splice(handlers.indexOf(cb), 1);
+        onAbortApi.remove = (cb: OnAbortHandle) => {
+            handlers.splice(handlers.findIndex(val => (val[0] === cb || val[1] === cb)), 1);
         };
         onAbortApi.isAborted = false;
+        Object.defineProperty(onAbortApi, 'isAborted', {
+            get: () => isAborted
+        });
         onAbortApi.withHandler = async (callback, handler) => {
             const handle = onAbortApi(handler);
             try {
@@ -64,8 +75,15 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
             }
         };
 
+        // type check
+        const onAbort : OnAbort = onAbortApi;
+
         // create the user promise
-        const p = new Promise<T>((resolve, reject) => executor.call(undefined, resolve, reject, onAbortApi));
+        const p = new Promise<T>((resolve, reject) => executor.call(undefined, resolve, reject, onAbort))
+            .then(t => {
+                isResolved = true;
+                return t;
+            });
 
         // create the aborting promise
         let res;
@@ -76,21 +94,47 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
         });
 
         // create the race
-        const r = Promise.race([a, p]).finally(() => { handlers.splice(0) }) as AbortablePromise<T>;
+        const r = Promise
+            .race([a, p]) as any;
 
         // create the caller abort api
         r.abortWithResolve = async (value?: T | PromiseLike<T>) => {
+            if (isAborted)
+                throw new Error('AbortablePromise already aborted');
+            if (isResolved)
+                throw new Error('AbortablePromise already resolved');
+
             res(value);
-            await Promise.all(handlers.map(h => h()));
+
+            isAborted = true;
+            await handlers.reduce(async (current, next) => {
+                await current;
+                const [,cb] = next;
+                await cb();
+            }, Promise.resolve());
         };
         r.abortWithReject = async (reason?: any) => {
+            if (isAborted)
+                throw new Error('AbortablePromise already aborted');
+            if (isResolved)
+                throw new Error('AbortablePromise already resolved');
+
             rej(reason);
-            await Promise.all(handlers.map(h => h()));
+
+            isAborted = true;
+            await handlers.reduce(async (current, next) => {
+                await current;
+                const [,cb] = next;
+                await cb();
+            }, Promise.resolve());
         };
 
         // This isn't a regular constructor so add the type chain manually
         Object.setPrototypeOf(r, AbortablePromise.prototype);
 
-        return r;
+        // type check
+        const ap : AbortablePromise<T> = r;
+
+        return ap;
     }
 }
