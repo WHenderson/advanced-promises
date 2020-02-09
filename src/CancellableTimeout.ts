@@ -1,4 +1,5 @@
 import {CancellablePromise} from "./CancellablePromise";
+import {OnAbort} from "./OnAbort";
 
 interface ResponseResolve<T> {
     resolve: T;
@@ -22,6 +23,11 @@ export class CancellableTimeout<T> extends Promise<T> implements CancellableProm
     static get [Symbol.species]()
     {
         return Promise;
+    }
+
+    public withAutoCancel(onAbort: OnAbort) : CancellablePromise<T> {
+        onAbort(() => this.cancel());
+        return this;
     }
 
     constructor(duration: number, response?: Response<T>) {

@@ -15,14 +15,22 @@ export interface AbortablePromise<T> extends Promise<T> {
 
     // The promise used as an abort in the promise/abort race
     abort: PromiseLike<T>;
+
+    // Return an abortable promise, combined with a timeout
+    // resolves according to response on timeout
+    withTimeout(timeout: CancellableTimeout<T>) : AbortablePromise<T>;
+    withTimeout(duration: number, response?: Response<T>) : AbortablePromise<T>;
+    withTimeout(timeout: number | CancellableTimeout<T>, response?: Response<T>);
+
+    // Add a default onAbort handler which will abortWith response
+    withAutoAbort(onAbort: OnAbort, response?: Response<T>) : AbortablePromise<T>;
 }
 
 export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<T> {
     public abortWith: (response?: Response<T>) => AbortablePromise<T>;
 
     // Handle internal usage in .then etc
-    static get [Symbol.species]()
-    {
+    static get [Symbol.species]() {
         return Promise;
     }
 
@@ -42,7 +50,6 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
             Promise.resolve(promise).then(resolve, reject);
         });
     }
-
 
     public withTimeout(timeout: CancellableTimeout<T>) : AbortablePromise<T>;
     public withTimeout(duration: number, response?: Response<T>) : AbortablePromise<T>;
@@ -70,13 +77,17 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
                 },
                 async () => {
                     waitTimeout.cancel();
-                    await this.abortWith(response);
                 }
             );
         }) as (AbortablePromise<T> & { timeout: CancellableTimeout<T> });
 
         a.timeout = waitTimeout;
         return a;
+    }
+
+    public withAutoAbort(onAbort: OnAbort, response?: Response<T>) : AbortablePromise<T> {
+        onAbort(() => { this.abortWith(response); });
+        return this;
     }
 
     // @ts-ignore
@@ -131,18 +142,18 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
         });
         const afinally = a
             .finally(async () => {
-            isAborted = true;
-            if (isResolved)
-                return;
+                isAborted = true;
+                if (isResolved)
+                    return;
 
-            await handlers.reduce(async (current, next) => {
-                await current;
-                const [cb,p] = next;
-                await (p === cb)
-                    ? cb()
-                    : p;
-            }, Promise.resolve());
-        });
+                await handlers.reduce(async (current, next) => {
+                    await current;
+                    const [cb,p] = next;
+                    await (p === cb)
+                        ? cb()
+                        : p;
+                }, Promise.resolve());
+            });
 
         // create the race
         const r = Promise
