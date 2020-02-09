@@ -87,15 +87,15 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
         let isResolved = false;
 
         // create the callee abortWith api
-        const onAbortApi = (cb: OnAbortCallback) => {
+        const onAbortApi = (cb: OnAbortCallback) : unknown | PromiseLike<unknown> => {
             const p = onAbortApi.isAborted
-                ? Promise.resolve().then(() => cb()).then(() => cb)
+                ? Promise.resolve().then(() => cb()).then(() => cb) // execute and resolve to handle
                 : cb;
             handlers.push([cb, p]);
             return p;
         };
-        onAbortApi.remove = (cb: OnAbortHandle) => {
-            handlers.splice(handlers.findIndex(val => (val[0] === cb || val[1] === cb)), 1);
+        onAbortApi.remove = (handle: OnAbortHandle) => {
+            handlers.splice(handlers.findIndex(val => (val[0] === handle || val[1] === handle)), 1);
         };
         onAbortApi.isAborted = false;
         Object.defineProperty(onAbortApi, 'isAborted', {
@@ -137,8 +137,10 @@ export class AbortablePromise<T> extends Promise<T> implements AbortablePromise<
 
             await handlers.reduce(async (current, next) => {
                 await current;
-                const [cb,] = next;
-                await cb();
+                const [cb,p] = next;
+                await (p === cb)
+                    ? cb()
+                    : p;
             }, Promise.resolve());
         });
 

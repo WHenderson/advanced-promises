@@ -10,17 +10,23 @@ const expect = chai.expect;
 
 describe('AbortablePromise.withTimeout', () => {
     it('over time', async () => {
-        let aborted = false;
+        let abortedEarly = false;
+        let abortedLate = false;
         const TIMEOUT = { v: 'timeout' };
         const COMPLETE = { v: 'complete' };
 
         const apromise = AbortablePromise.fromAsync(async (onAbort) => {
+            // test abort
+            await onAbort(() => {
+                abortedEarly = true;
+            });
+
             // wait long enough to cause timeout
             await new CancellableTimeout(50);
 
-            // test abortWith
+            // test abort
             await onAbort(() => {
-                aborted = true;
+                abortedLate = true;
             });
 
             return COMPLETE;
@@ -33,24 +39,31 @@ describe('AbortablePromise.withTimeout', () => {
         const response = await tpromise;
 
         expect(response).to.equal(TIMEOUT);
+        expect(abortedEarly).to.be.true;
 
         await new CancellableTimeout(50);
 
-        expect(aborted).to.be.true;
+        expect(abortedLate).to.be.true;
     });
 
     it('under time', async () => {
-        let aborted = false;
+        let abortedEarly = false;
+        let abortedLate = false;
         const TIMEOUT = { v: 'timeout' };
         const COMPLETE = { v: 'complete' };
 
         const apromise = AbortablePromise.fromAsync(async (onAbort) => {
+            // test abort
+            await onAbort(() => {
+                abortedEarly = true;
+            });
+
             // wait long enough to cause timeout
             await new CancellableTimeout(10);
 
-            // test abortWith
-            onAbort(() => {
-                aborted = true;
+            // test abort
+            await onAbort(() => {
+                abortedLate = true;
             });
 
             return COMPLETE;
@@ -63,6 +76,7 @@ describe('AbortablePromise.withTimeout', () => {
         const response = await tpromise;
 
         expect(response).to.equal(COMPLETE);
-        expect(aborted).to.be.false;
+        expect(abortedEarly).to.be.false;
+        expect(abortedLate).to.be.false;
     });
 });
