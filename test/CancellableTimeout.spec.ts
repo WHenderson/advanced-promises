@@ -11,7 +11,7 @@ const expect = chai.expect;
 describe('CancellableTimeout', () => {
    it('duration 100ms', async () => {
       const duration = 100;
-      const errorMargin = 10;
+      const errorMargin = 20;
 
       const startTime = +new Date();
       await new CancellableTimeout(duration);

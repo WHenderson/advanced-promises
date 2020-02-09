@@ -18,7 +18,7 @@ describe('AbortablePromise.withTimeout', () => {
             // wait long enough to cause timeout
             await new CancellableTimeout(50);
 
-            // test abort
+            // test abortWith
             await onAbort(() => {
                 aborted = true;
             });
@@ -48,7 +48,7 @@ describe('AbortablePromise.withTimeout', () => {
             // wait long enough to cause timeout
             await new CancellableTimeout(10);
 
-            // test abort
+            // test abortWith
             onAbort(() => {
                 aborted = true;
             });

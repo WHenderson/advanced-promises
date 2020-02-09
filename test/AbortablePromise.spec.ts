@@ -39,7 +39,7 @@ describe('AbortablePromise', () => {
         });
 
         const abortValue = { value: 'b' };
-        await apromise.abortWithResolve(abortValue);
+        apromise.abortWith({ resolve: abortValue });
 
         await expect(apromise).to.eventually.equal(abortValue);
         expect(aborted).to.be.true;
@@ -58,7 +58,7 @@ describe('AbortablePromise', () => {
         });
 
         const abortValue = new Error('abort');
-        await apromise.abortWithReject(abortValue);
+        apromise.abortWith({ reject: abortValue });
 
         await expect(apromise).to.eventually.be.rejectedWith(Error).and.equal(abortValue);
         expect(aborted).to.be.true;
