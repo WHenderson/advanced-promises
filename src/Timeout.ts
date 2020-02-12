@@ -1,13 +1,7 @@
-import {CancellablePromise} from "./CancellablePromise";
-import {OnAbort} from "./OnAbort";
-
-interface ResponseResolve<T> {
-    resolve: T;
-}
-interface ResponseReject {
-    reject: any;
-}
-export type Response<T> = ResponseResolve<T> | ResponseReject;
+import {ResponseReject, ResponseResolve, Response} from "./Promise";
+import {CancellablePromiseLike} from "./CancellablePromiseLike";
+import {AbortablePromiseLike} from "./AbortablePromiseLike";
+import {AbortApi, AbortApiInternal} from "./AbortApi";
 
 function isResponseResolve<T>(response: Response<T>) : response is ResponseResolve<T> {
     return (response && {}.hasOwnProperty.call(response, 'resolve'));
@@ -16,7 +10,12 @@ function isResponseReject<T>(response: ResponseReject) : response is ResponseRej
     return (response && {}.hasOwnProperty.call(response, 'reject'));
 }
 
-export class CancellableTimeout<T> extends Promise<T> implements CancellablePromise<T> {
+export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>, AbortablePromiseLike<T> {
+    public abortWith: (response?: Response<T>) => this;
+    public promise: PromiseLike<T>;
+    public abort: PromiseLike<T>;
+    public aapi: AbortApi;
+
     public cancel: () => void;
 
     // Handle internal usage in .then etc
@@ -25,10 +24,15 @@ export class CancellableTimeout<T> extends Promise<T> implements CancellableProm
         return Promise;
     }
 
-    public withAutoCancel(onAbort: OnAbort) : CancellablePromise<T> {
-        onAbort(() => this.cancel());
+    public withAutoCancel(aapi: AbortApi) : this {
+        aapi.on(() => this.cancel());
         return this;
     }
+    public withAutoAbort(aapi: AbortApi, response?: Response<T>) : this {
+        aapi.on(() => { this.abortWith(response); });
+        return this;
+    }
+
 
     constructor(duration: number, response?: Response<T>) {
         // Create base promise
@@ -37,6 +41,9 @@ export class CancellableTimeout<T> extends Promise<T> implements CancellableProm
             resolve = res;
             reject = rej;
         });
+
+        // Create Abort Api
+        const iapi = new AbortApiInternal();
 
         // Create timeout
         let id = setTimeout(() => {
@@ -55,6 +62,17 @@ export class CancellableTimeout<T> extends Promise<T> implements CancellableProm
                 clearTimeout(id);
                 id = undefined;
             }
-        }
+        };
+
+        this.abortWith = (response?: Response<T>) : this => {
+            if (response && 'resolve' in response)
+                resolve(response.resolve);
+            else if (response && 'reject' in response)
+                reject(response.reject);
+            else
+                resolve();
+
+            return this;
+        };
     }
 }

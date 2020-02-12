@@ -1,23 +1,23 @@
-import {AbortablePromise} from "../src/AbortablePromise";
-import {CancellableTimeout} from "../src/CancellableTimeout";
+import {Abortable} from "../src/Abortable";
+import {Timeout} from "../src/Timeout";
 
 it('nested', async () => {
-    const waitOuter = AbortablePromise.fromAsync(async (onAbort) => {
+    const waitOuter = Abortable.fromAsync(async (aapi) => {
         await Promise.resolve();
 
         console.log('> outer');
         const EX_ABORT = new Error('abort inner');
 
-        const waitInner = AbortablePromise.fromAsync(async (onAbort) => {
+        const waitInner = Abortable.fromAsync(async (aapi) => {
             await Promise.resolve();
 
             console.log('> inner');
 
-            await new CancellableTimeout(1000).withAutoCancel(onAbort);
+            await new Timeout(1000).withAutoCancel(aapi);
 
             console.log('< inner');
             return 'something';
-        }).withTimeout(1000, { reject: new Error('timeout inner')}).withAutoAbort(onAbort, { reject: EX_ABORT });
+        }).withTimeout(1000, { reject: new Error('timeout inner')}).withAutoAbort(aapi, { reject: EX_ABORT });
 
         try {
             return await waitInner;
@@ -32,7 +32,7 @@ it('nested', async () => {
         }
 
         /*
-        const result = await onAbort.withHandler(
+        const result = await aapi.withHandler(
             async () => {
                 console.log('>>inner');
                 try {

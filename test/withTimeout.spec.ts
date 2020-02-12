@@ -1,8 +1,7 @@
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
-import {AbortablePromise} from "../src/AbortablePromise";
-import {CancellableTimeout} from "../src/CancellableTimeout";
-
+import {Abortable} from "../src/Abortable";
+import {Timeout} from "../src/Timeout";
 
 chai.use(chaiAsPromised);
 const should = chai.should;
@@ -15,17 +14,17 @@ describe('AbortablePromise.withTimeout', () => {
         const TIMEOUT = { v: 'timeout' };
         const COMPLETE = { v: 'complete' };
 
-        const apromise = AbortablePromise.fromAsync(async (onAbort) => {
+        const apromise = Abortable.fromAsync(async (aapi) => {
             // test abort
-            await onAbort(() => {
+            await aapi.on(() => {
                 abortedEarly = true;
             });
 
             // wait long enough to cause timeout
-            await new CancellableTimeout(50);
+            await new Timeout(50);
 
             // test abort
-            await onAbort(() => {
+            await aapi.on(() => {
                 abortedLate = true;
             });
 
@@ -41,7 +40,7 @@ describe('AbortablePromise.withTimeout', () => {
         expect(response).to.equal(TIMEOUT);
         expect(abortedEarly).to.be.true;
 
-        await new CancellableTimeout(50);
+        await new Timeout(50);
 
         expect(abortedLate).to.be.true;
     });
@@ -52,17 +51,17 @@ describe('AbortablePromise.withTimeout', () => {
         const TIMEOUT = { v: 'timeout' };
         const COMPLETE = { v: 'complete' };
 
-        const apromise = AbortablePromise.fromAsync(async (onAbort) => {
+        const apromise = Abortable.fromAsync(async (aapi) => {
             // test abort
-            await onAbort(() => {
+            await aapi.on(() => {
                 abortedEarly = true;
             });
 
             // wait long enough to cause timeout
-            await new CancellableTimeout(10);
+            await new Timeout(10);
 
             // test abort
-            await onAbort(() => {
+            await aapi.on(() => {
                 abortedLate = true;
             });
 
