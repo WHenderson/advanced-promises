@@ -9,7 +9,7 @@ chai.use(chaiAsPromised);
 const should = chai.should;
 const expect = chai.expect;
 
-describe('process', function () {
+describe('Process', function () {
     this.timeout(10000);
 
 
