@@ -8,7 +8,7 @@ const should = chai.should;
 const expect = chai.expect;
 
 
-describe.only('NestedTimeout', () => {
+describe('NestedTimeout', () => {
 
     const EX_ABORT_INNER = new Error('abort inner');
     const EX_TIMEOUT_INNER = new Error('timeout inner');
