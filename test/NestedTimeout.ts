@@ -8,7 +8,7 @@ const should = chai.should;
 const expect = chai.expect;
 
 
-describe('NestedTimeout', () => {
+describe.only('NestedTimeout', () => {
 
     const EX_ABORT_INNER = new Error('abort inner');
     const EX_TIMEOUT_INNER = new Error('timeout inner');
@@ -22,7 +22,7 @@ describe('NestedTimeout', () => {
             //console.log('> outer');
 
             const waitInner = Abortable.fromAsync(async (aapi) => {
-                await Promise.resolve();
+                //await Promise.resolve();
 
                 //console.log('> inner');
 
@@ -57,8 +57,8 @@ describe('NestedTimeout', () => {
         await expect(wait).to.eventually.be.rejectedWith(EX_TIMEOUT_INNER);
     });
 
-    it('abort out', async () => {
-        const wait = nest({outerTimeout: 50, innerTimeout: 100, processTimeout: 50 });
+    it('abort outer', async () => {
+        const wait = nest({outerTimeout: 50, innerTimeout: 200, processTimeout: 100 });
         await expect(wait).to.eventually.be.rejectedWith(EX_TIMEOUT_OUTER);
     });
 
