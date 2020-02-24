@@ -36,9 +36,7 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
   public withTimeout(duration: number, response?: Response<T>): Abortable<T>;
   public withTimeout(timeout: number | Timeout<T>, response?: Response<T>): Abortable<T> {
     if (!timeout) return this;
-    if (typeof timeout === 'number') timeout = new Timeout<T>(timeout);
-
-    const waitTimeout = timeout;
+    const waitTimeout = (typeof timeout === 'number') ? new Timeout<T>(timeout) : timeout;
 
     this.aapi.on(() => waitTimeout.cancel());
 
@@ -128,5 +126,14 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
     Object.setPrototypeOf(r, Abortable.prototype);
 
     return r;
+  }
+
+  static resolve() : Abortable<void>;
+  static resolve<T>(value?: T | PromiseLike<T>) : Abortable<T> {
+    return new Abortable<T>((resolve) => resolve(value));
+  }
+
+  static reject<T = never>(reason?: any) : Abortable<T> {
+    return new Abortable<T>((resolve, reject) => reject(reason));
   }
 }
