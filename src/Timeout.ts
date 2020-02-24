@@ -31,6 +31,7 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
   public withAutoAbort(aapi: AbortApi, response?: Response<T>): this {
     aapi.on(() => {
       this.abortWith(response);
+      this.cancel();
     });
     return this;
   }
