@@ -1,6 +1,6 @@
-import { ABORT_STATE, AbortApi, OnAbortCallback } from './AbortApi';
+import { ABORT_STATE, AbortApi, AbortApiInternal as AbortApiInternalInterface, OnAbortCallback } from './AbortApi';
 
-export class AbortApiInternal implements AbortApiInternal {
+export class AbortApiInternal implements AbortApiInternalInterface {
   public handlers: [OnAbortCallback, OnAbortCallback | PromiseLike<OnAbortCallback>][];
   public state: ABORT_STATE;
   public aapi: AbortApi;

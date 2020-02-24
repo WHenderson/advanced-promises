@@ -1,4 +1,5 @@
-import { ABORT_STATE, AbortApi, AbortApiInternal } from './AbortApi';
+import { ABORT_STATE, AbortApi } from './AbortApi';
+import { AbortApiInternal } from './AbortApiInternal';
 import { Response } from './Promise';
 import { Timeout } from './Timeout';
 import { AbortablePromiseLike, AbortablePromiseExecutor } from './AbortablePromiseLike';

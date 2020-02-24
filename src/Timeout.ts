@@ -1,7 +1,8 @@
 import { ResponseReject, ResponseResolve, Response } from './Promise';
 import { CancellablePromiseLike } from './CancellablePromiseLike';
 import { AbortablePromiseLike } from './AbortablePromiseLike';
-import { AbortApi, AbortApiInternal } from './AbortApi';
+import { AbortApi } from './AbortApi';
+import { AbortApiInternal } from './AbortApiInternal';
 
 function isResponseResolve<T>(response: Response<T>): response is ResponseResolve<T> {
   return response && {}.hasOwnProperty.call(response, 'resolve');
