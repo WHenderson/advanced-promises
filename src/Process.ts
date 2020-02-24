@@ -1,36 +1,36 @@
-import {ChildProcess} from "child_process";
-import {Abortable} from "./Abortable";
+import { ChildProcess } from 'child_process';
+import { Abortable } from './Abortable';
 
 export interface ProcessResponseResolve {
-    code: number;
-    signal: string;
+  code: number;
+  signal: string;
 }
 
 export class Process extends Abortable<ProcessResponseResolve> {
-    public process: ChildProcess;
+  public process: ChildProcess;
 
-    private static _ctor(process : ChildProcess) : Process {
-        const p = new Abortable<ProcessResponseResolve>((resolve, reject, aapi) => {
-            process
-                .on('exit', (code, signal) => {
-                    resolve({ code, signal });
-                })
-                .on('error', (err) => {
-                    reject(err);
-                });
+  private static _ctor(process: ChildProcess): Process {
+    const p = new Abortable<ProcessResponseResolve>((resolve, reject, aapi) => {
+      process
+        .on('exit', (code, signal) => {
+          resolve({ code, signal });
+        })
+        .on('error', err => {
+          reject(err);
+        });
 
-            aapi.on(() => {
-                process.kill();
-            })
-        }) as Process;
+      aapi.on(() => {
+        process.kill();
+      });
+    }) as Process;
 
-        p.process = process;
+    p.process = process;
 
-        return p;
-    }
+    return p;
+  }
 
-    // @ts-ignore
-    constructor(process : ChildProcess) {
-        return Process._ctor(process);
-    }
+  // @ts-ignore
+  constructor(process: ChildProcess) {
+    return Process._ctor(process);
+  }
 }
