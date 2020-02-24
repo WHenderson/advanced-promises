@@ -13,6 +13,7 @@
     "prettier": "^1.19.1",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
+    "tslint-no-unused-expression-chai": "^0.1.4",
     "typescript": "^3.7.5"
   },
   "repository": {

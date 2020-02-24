@@ -17,18 +17,10 @@ describe('NestedTimeout', () => {
 
     function nest({ outerTimeout, innerTimeout, processTimeout }) {
         const waitOuter = Abortable.fromAsync(async (aapi) => {
-            //await Promise.resolve();
-
-            //console.log('> outer');
-
             const waitInner = Abortable.fromAsync(async (aapi) => {
-                //await Promise.resolve();
-
-                //console.log('> inner');
 
                 await new Timeout(processTimeout).withAutoCancel(aapi);
 
-                //console.log('< inner');
                 return SUCCESS;
             }).withTimeout(innerTimeout, { reject: EX_TIMEOUT_INNER}).withAutoAbort(aapi, { reject: EX_ABORT_INNER });
 
@@ -36,11 +28,7 @@ describe('NestedTimeout', () => {
                 return await waitInner;
             }
             catch (ex) {
-                //console.log('inner ex', ex);
                 throw ex;
-            }
-            finally {
-                //console.log('< outer');
             }
         }).withTimeout(outerTimeout, { reject: EX_TIMEOUT_OUTER});
 

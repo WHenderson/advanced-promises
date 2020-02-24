@@ -1,9 +1,7 @@
 import {AbortApi} from "./AbortApi";
 import {Response} from  "./Promise";
 
-export interface AbortablePromiseExecutor<T> {
-    (resolve : (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void, aapi : AbortApi) : void
-}
+export type AbortablePromiseExecutor<T> = (resolve : (value?: T | PromiseLike<T>) => void, reject: (reason?: any) => void, aapi : AbortApi) => void;
 
 export interface AbortablePromiseLike<T> extends Promise<T> {
     // Abort with either a resolve or a reject. Returns this.

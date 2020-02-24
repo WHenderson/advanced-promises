@@ -60,7 +60,7 @@ describe('Timeout', () => {
 
       expect(tpromise).to.be.an.instanceOf(Timeout);
 
-      const promise = tpromise.then(() => {});
+      const promise = tpromise.then(() => {/* ignore */});
 
       expect(promise).to.not.be.an.instanceOf(Timeout);
       expect(promise).to.be.an.instanceOf(Promise);

@@ -1,8 +1,6 @@
 import {ChildProcess} from "child_process";
 import {Abortable} from "./Abortable";
 
-//cp.fork()
-
 export interface ProcessResponseResolve {
     code: number;
     signal: string;

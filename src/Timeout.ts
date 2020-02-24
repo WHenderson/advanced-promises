@@ -36,7 +36,8 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
 
     constructor(duration: number, response?: Response<T>) {
         // Create base promise
-        let resolve, reject;
+        let resolve;
+        let reject;
         super((res, rej) => {
             resolve = res;
             reject = rej;

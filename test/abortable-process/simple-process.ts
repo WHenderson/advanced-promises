@@ -1,7 +1,7 @@
 import * as process from 'process';
 import {Timeout} from "../../src/Timeout";
 
-(async function () {
+(async () => {
     console.log('begin');
 
     const duration = process.env.MY_DURATION

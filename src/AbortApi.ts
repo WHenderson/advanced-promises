@@ -1,6 +1,4 @@
-export interface OnAbortCallback {
-    () : void | PromiseLike<void>;
-}
+export type OnAbortCallback = () => void | PromiseLike<void>;
 
 export type OnAbortHandle = unknown | PromiseLike<unknown>;
 
@@ -12,7 +10,7 @@ export enum ABORT_STATE{
 
 export interface AbortApi {
     on(cb: OnAbortCallback) : OnAbortHandle;
-    off(handle: OnAbortHandle, ignore_notfound?: boolean) : void;
+    off(handle: OnAbortHandle, ignoreNotFound?: boolean) : void;
 
     state: ABORT_STATE;
 
@@ -21,13 +19,15 @@ export interface AbortApi {
 
 export interface AbortApiInternal {
     aapi: AbortApi;
+    state: ABORT_STATE;
+    handlers: [OnAbortCallback, OnAbortCallback|PromiseLike<OnAbortCallback>][];
 
     abort() : PromiseLike<void>;
 }
 
 export class AbortApi implements AbortApi {
     public on: (cb: OnAbortCallback) => OnAbortHandle;
-    public off: (handle: OnAbortHandle, ignore_notfound?: boolean) => void;
+    public off: (handle: OnAbortHandle, ignoreNotFound?: boolean) => void;
 
     constructor(internal: AbortApiInternal) {
         this.on = function on(cb: OnAbortCallback) : unknown | PromiseLike<unknown>  {
@@ -35,18 +35,18 @@ export class AbortApi implements AbortApi {
             // * waiting on the handle will also return a handle that can be removed
             // * if the state is aborting, then the handler will be called immediately
 
-            const p = internal.state != ABORT_STATE.NONE
+            const p = internal.state !== ABORT_STATE.NONE
                 ? Promise.resolve(cb()).then(() => cb)
                 : cb;
             internal.handlers.push([cb, p]);
             return p;
         };
 
-        this.off = function off(handle: OnAbortHandle, ignore_notfound: boolean = true) : void {
+        this.off = function off(handle: OnAbortHandle, ignoreNotFound: boolean = true) : void {
             const index = internal.handlers.findIndex(([cb, p]) => (cb === handle || p === handle));
             if (index !== -1)
                 internal.handlers.splice(index, 1);
-            else if (!ignore_notfound)
+            else if (!ignoreNotFound)
                 throw new Error('handle not found');
         };
 
@@ -66,31 +66,3 @@ export class AbortApi implements AbortApi {
     }
 }
 
-export class AbortApiInternal implements AbortApiInternal {
-    public handlers: [OnAbortCallback, OnAbortCallback|PromiseLike<OnAbortCallback>][];
-    public state: ABORT_STATE;
-    public aapi: AbortApi;
-
-    constructor() {
-        this.handlers = [];
-        this.state = ABORT_STATE.NONE;
-        this.aapi = new AbortApi(this);
-    }
-
-    async abort() : Promise<void> {
-        if (this.state !== ABORT_STATE.NONE)
-            return;
-
-        this.state = ABORT_STATE.ABORTING;
-
-        await this.handlers.reduce(async (current, next) => {
-            await current;
-            const [cb,p] = next;
-            await (p === cb)
-                ? cb()
-                : p;
-        }, Promise.resolve());
-
-        this.state = ABORT_STATE.ABORTED;
-    }
-}

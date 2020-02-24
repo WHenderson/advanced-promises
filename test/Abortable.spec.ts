@@ -65,11 +65,11 @@ describe('AbortablePromise', () => {
     });
 
     it('correct prototype', () => {
-        const apromise = new Abortable(() => {});
+        const apromise = new Abortable(() => {/* ignore */});
 
         expect(apromise).to.be.an.instanceOf(Abortable);
 
-        const promise = apromise.then(() => {});
+        const promise = apromise.then(() => {/* ignore */});
 
         expect(promise).to.not.be.an.instanceOf(Abortable);
         expect(promise).to.be.an.instanceOf(Promise);

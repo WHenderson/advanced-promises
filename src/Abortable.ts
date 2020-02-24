@@ -49,13 +49,13 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
             .finally(() =>  {
                 waitTimeout.cancel()
             })
-            .catch(() => {});
+            .catch(() => {/* swallow errors */});
 
         waitTimeout
             .finally(() => {
                 this.abortWith(response);
             })
-            .catch(() => {});
+            .catch(() => {/* swallow errors */});
 
         this.timeout = waitTimeout;
         return this;
@@ -105,8 +105,8 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
             .race([a, p])
             .finally(() =>
                 Promise.race([
-                    afinally.catch(() => {}), // ignore errors
-                    pfinally.catch(() => {})  // ignore errors
+                    afinally.catch(() => {/* swallow errors */}),
+                    pfinally.catch(() => {/* swallow errors */})
                 ])
             ) as Abortable<T>; // ensure
 
