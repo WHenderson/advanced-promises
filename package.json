@@ -2,7 +2,7 @@
   "name": "advanced-promises",
   "version": "1.0.0",
   "description": "Advanced promise types",
-  "main": "index.js",
+  "main": "src/index.js",
   "private": true,
   "devDependencies": {
     "@types/mocha": "^7.0.1",
@@ -10,6 +10,32 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "mocha": "^7.0.1",
+    "prettier": "^1.19.1",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WHenderson/advanced-promise.git"
+  },
+  "homepage": "https://github.com/WHenderson/advanced-promise#readme",
+  "keywords": [
+    "promise",
+    "abortable",
+    "cancellable",
+    "timeout",
+    "process"
+  ],
+  "license": "Apache 2.0",
+  "author": {
+    "name": "Will Henderson",
+    "email": "whenderson.github@gmail.com"
+  },
+  "scripts": {
+    "test": "mocha",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
   }
 }
