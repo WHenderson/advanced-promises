@@ -1,13 +1,13 @@
-import { ABORT_STATE, AbortApi, AbortApiInternal as AbortApiInternalInterface, OnAbortCallback } from './AbortApi';
+import {ABORT_STATE, AbortApi, AbortApiInternal as AbortApiInternalInterface, OnAbortCallback} from './AbortApi';
 
 export class AbortApiInternal implements AbortApiInternalInterface {
   public handlers: [OnAbortCallback, OnAbortCallback | PromiseLike<OnAbortCallback>][];
   public state: ABORT_STATE;
   public aapi: AbortApi;
 
-  constructor() {
+  constructor(state : ABORT_STATE = ABORT_STATE.NONE) {
     this.handlers = [];
-    this.state = ABORT_STATE.NONE;
+    this.state = state;
     this.aapi = new AbortApi(this);
   }
 

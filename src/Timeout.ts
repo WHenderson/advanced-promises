@@ -1,7 +1,7 @@
 import { ResponseReject, ResponseResolve, Response } from './Promise';
 import { CancellablePromiseLike } from './CancellablePromiseLike';
 import { AbortablePromiseLike } from './AbortablePromiseLike';
-import { AbortApi } from './AbortApi';
+import {ABORT_STATE, AbortApi} from './AbortApi';
 import { AbortApiInternal } from './AbortApiInternal';
 
 function isResponseResolve<T>(response: Response<T>): response is ResponseResolve<T> {
@@ -11,11 +11,15 @@ function isResponseReject<T>(response: ResponseReject): response is ResponseReje
   return response && {}.hasOwnProperty.call(response, 'reject');
 }
 
+const INF = {};
+const NUL = {};
+
 export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>, AbortablePromiseLike<T> {
   public abortWith: (response?: Response<T>) => this;
   public promise: PromiseLike<T>;
   public abort: PromiseLike<T>;
   public aapi: AbortApi;
+  public timeoutId: NodeJS.Timeout;
 
   public cancel: () => void;
 
@@ -37,6 +41,9 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
   }
 
   constructor(duration: number, response?: Response<T>) {
+    // Create Abort Api
+    const iapi = new AbortApiInternal(duration === NUL ? ABORT_STATE.ABORTED : ABORT_STATE.NONE);
+
     // Create base promise
     let resolve;
     let reject;
@@ -45,31 +52,60 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
       reject = rej;
     });
 
-    // Create Abort Api
-    const iapi = new AbortApiInternal();
-
     // Create timeout
-    let id = setTimeout(() => {
-      id = undefined;
+    let timeoutId = undefined;
+
+    const onTimeout = () => {
+      timeoutId = undefined;
       if (isResponseResolve(response)) resolve(response.resolve);
       else if (isResponseReject(response)) reject(response.reject);
       else resolve();
-    }, duration);
+    };
+
+    if (duration === NUL) {
+      onTimeout();
+    }
+    else if (duration !== INF) {
+      timeoutId = setTimeout(onTimeout, duration);
+    }
 
     // Create cancel interface
     this.cancel = () => {
-      if (id) {
-        clearTimeout(id);
-        id = undefined;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = undefined;
       }
     };
 
     this.abortWith = (response?: Response<T>): this => {
-      if (response && 'resolve' in response) resolve(response.resolve);
-      else if (response && 'reject' in response) reject(response.reject);
-      else resolve();
+      this.cancel();
+
+      iapi
+          .abort()
+          .then(() => {
+            if (response && 'resolve' in response) resolve(response.resolve);
+            else if (response && 'reject' in response) reject(response.reject);
+            else resolve();
+          });
 
       return this;
     };
+
+    this.aapi = iapi.aapi;
+    this.timeoutId = timeoutId;
+  }
+
+  static resolve() : Timeout<void>;
+  static resolve<T>(value?: T | PromiseLike<T>) : Timeout<T> {
+    return new Timeout<T>(NUL as number, { resolve: value });
+  }
+
+  static reject<T = never>(reason?: any) : Timeout<T> {
+    return new Timeout<T>(NUL as number, { reject: reason });
+  }
+
+  static infinite() : Timeout<void>;
+  static infinite<T>(value?: T | PromiseLike<T>) : Timeout<T> {
+    return new Timeout<T>(INF as number, { resolve: value });
   }
 }
