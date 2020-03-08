@@ -20,12 +20,20 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
   public abort: PromiseLike<T>;
   public aapi: AbortApi;
   public timeoutId: NodeJS.Timeout;
+  public reset: (duration: number) => this;
 
-  public cancel: () => void;
+  //public cancel: () => void;
 
   // Handle internal usage in .then etc
   static get [Symbol.species]() {
     return Promise;
+  }
+
+  public cancel(): void {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = undefined;
+    }
   }
 
   public withAutoCancel(aapi: AbortApi): this {
@@ -53,29 +61,30 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
     });
 
     // Create timeout
-    let timeoutId = undefined;
+    this.timeoutId = undefined;
 
     const onTimeout = () => {
-      timeoutId = undefined;
+      this.timeoutId = undefined;
       if (isResponseResolve(response)) resolve(response.resolve);
       else if (isResponseReject(response)) reject(response.reject);
       else resolve();
     };
 
-    if (duration === NUL) {
-      onTimeout();
-    }
-    else if (duration !== INF) {
-      timeoutId = setTimeout(onTimeout, duration);
-    }
+    this.reset = (duration: number) => {
+      if (this.timeoutId)
+        clearTimeout(this.timeoutId);
 
-    // Create cancel interface
-    this.cancel = () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = undefined;
+      if (duration === NUL) {
+        onTimeout();
       }
+      else if (duration !== INF) {
+        this.timeoutId = setTimeout(onTimeout, duration);
+      }
+
+      return this;
     };
+
+    this.reset(duration);
 
     this.abortWith = (response?: Response<T>): this => {
       this.cancel();
@@ -92,7 +101,6 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
     };
 
     this.aapi = iapi.aapi;
-    this.timeoutId = timeoutId;
   }
 
   static resolve() : Timeout<void>;
