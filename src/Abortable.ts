@@ -3,6 +3,7 @@ import { AbortApiInternal } from './AbortApiInternal';
 import { Response } from './Promise';
 import { Timeout } from './Timeout';
 import { AbortablePromiseLike, AbortablePromiseExecutor } from './AbortablePromiseLike';
+import {Deconstructed} from "./Deconstructed";
 
 export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> {
   public abortWith: (response?: Response<T>) => this;
@@ -17,9 +18,9 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
   }
 
   static fromAsync<T>(executor: (aapi: AbortApi) => T | PromiseLike<T>): Abortable<T> {
-    return new Abortable<T>((resolve, reject, onAbort) => {
+    return new Abortable<T>((resolve, reject, aapi) => {
       try {
-        resolve(executor(onAbort));
+        resolve(executor(aapi));
       } catch (ex) {
         reject(ex);
       }
@@ -80,12 +81,7 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
     });
 
     // create the aborting promise
-    let res;
-    let rej;
-    const a = new Promise<T>((resolve, reject) => {
-      res = resolve;
-      rej = reject;
-    });
+    const a = new Deconstructed<T>();
     const afinally = a.finally(async () => {
       if (isResolved) return;
 
@@ -109,12 +105,12 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
 
     // create the caller abortWith api
     r.abortWith = (response?: Response<T>) => {
-      if (iapi.state !== ABORT_STATE.NONE) throw new Error('AbortablePromise already aborted/aborting');
-      if (isResolved) throw new Error('AbortablePromise already resolved');
+      if (iapi.state !== ABORT_STATE.NONE || isResolved)
+        return r;
 
-      if (response && 'resolve' in response) res(response.resolve);
-      else if (response && 'reject' in response) rej(response.reject);
-      else res();
+      if (response && 'resolve' in response) a.resolve(response.resolve);
+      else if (response && 'reject' in response) a.reject(response.reject);
+      else a.resolve();
 
       return r;
     };

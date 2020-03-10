@@ -1,6 +1,6 @@
 import { AbortablePromiseLike } from './AbortablePromiseLike';
 import { CancellablePromiseLike } from './CancellablePromiseLike';
-import { AbortApi } from './AbortApi';
+import { AbortApi, ABORT_STATE } from './AbortApi';
 import { AbortApiInternal } from './AbortApiInternal';
 import { Abortable } from './Abortable';
 import { Timeout } from './Timeout';
@@ -11,6 +11,7 @@ export {
     CancellablePromiseLike,
     AbortApiInternal,
     AbortApi,
+    ABORT_STATE,
     Abortable,
     Timeout,
     Process

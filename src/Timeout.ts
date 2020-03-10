@@ -11,9 +11,6 @@ function isResponseReject<T>(response: ResponseReject): response is ResponseReje
   return response && {}.hasOwnProperty.call(response, 'reject');
 }
 
-const INF = {};
-const NUL = {};
-
 export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>, AbortablePromiseLike<T> {
   public abortWith: (response?: Response<T>) => this;
   public promise: PromiseLike<T>;
@@ -50,7 +47,7 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
 
   constructor(duration: number, response?: Response<T>) {
     // Create Abort Api
-    const iapi = new AbortApiInternal(duration === NUL ? ABORT_STATE.ABORTED : ABORT_STATE.NONE);
+    const iapi = new AbortApiInternal(duration === Timeout.NUL ? ABORT_STATE.ABORTED : ABORT_STATE.NONE);
 
     // Create base promise
     let resolve;
@@ -74,10 +71,10 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
       if (this.timeoutId)
         clearTimeout(this.timeoutId);
 
-      if (duration === NUL) {
+      if (duration === Timeout.NUL) {
         onTimeout();
       }
-      else if (duration !== INF) {
+      else if (duration !== Timeout.INF) {
         this.timeoutId = setTimeout(onTimeout, duration);
       }
 
@@ -105,15 +102,19 @@ export class Timeout<T> extends Promise<T> implements CancellablePromiseLike<T>,
 
   static resolve() : Timeout<void>;
   static resolve<T>(value?: T | PromiseLike<T>) : Timeout<T> {
-    return new Timeout<T>(NUL as number, { resolve: value });
+    return new Timeout<T>(Timeout.NUL, { resolve: value });
   }
 
   static reject<T = never>(reason?: any) : Timeout<T> {
-    return new Timeout<T>(NUL as number, { reject: reason });
+    return new Timeout<T>(Timeout.NUL, { reject: reason });
   }
 
   static infinite() : Timeout<void>;
   static infinite<T>(value?: T | PromiseLike<T>) : Timeout<T> {
-    return new Timeout<T>(INF as number, { resolve: value });
+    return new Timeout<T>(Timeout.INF, { resolve: value });
   }
+
+  // Fake numbers for passing to
+  static readonly INF : number = Infinity;
+  static readonly NUL : number = null;
 }

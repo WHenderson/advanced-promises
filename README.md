@@ -30,6 +30,17 @@ Example:
     
     await promise; // will resolve to 'my value'
 
+## DeconstructedPromiseLike
+A promise with the resolve/reject handlers made into properties of the instance
+
+Example:
+
+    const promise = new Deconstructed();
+    
+    promise.resolve('my value');
+    
+    await promise(); // will resolve to 'my value'
+
 ## Installation
 
 Yarn
@@ -65,27 +76,33 @@ Resolving
 
 ### AbortApi
 
-* AbortApi.this.on
-* AbortApi.this.off
-* AbortApi.this.state
-* AbortApi.prototype.withHandler
+* [AbortApi.this.on](#abortapithison)
+* [AbortApi.this.off](#abortapithisoff)
+* [AbortApi.this.state](#abortapithisstate)
+* [AbortApi.prototype.withHandler](#abortapiprototypewithhandler)
 
 ## Timeout
 
 Creating
-* Timeout (constructor)
-* Timeout.resolve
-* Timeout.reject
-* Timeout.infinite
+* [Timeout (constructor)](#timeout-constructor)
+* [Timeout.resolve](#timeoutresolve)
+* [Timeout.reject](#timeoutreject)
+* [Timeout.infinite](#timeoutinfinite)
+* [Timeout.INF](#)
+* [Timeout.NUL](#)
 
 Combining
-* Timeout.prototype.withAutoCancel
-* Timeout.prototype.withAutoAbort
+* [Timeout.prototype.withAutoCancel](#timeoutprototypewithautocancel)
+* [Timeout.prototype.withAutoAbort](#timeoutprototypewithautoabort)
 
 Resolving
-* Timeout.this.abortWith
-* Timeout.this.aapi
-* Timeout.this.cancel
+* [Timeout.this.abortWith](#timeoutthisabortwith)
+* [Timeout.this.aapi](#timeoutthisaapi)
+* [Timeout.this.cancel](#timeoutthiscancel)
+
+Mutating
+* [Timeout.reset](#)
+* [Timeout.]
 
 ## Process (extends Abortable)
 
