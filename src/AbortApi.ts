@@ -12,7 +12,7 @@ export interface AbortApi {
   on(cb: OnAbortCallback): OnAbortHandle;
   off(handle: OnAbortHandle, ignoreNotFound?: boolean): void;
 
-  state: ABORT_STATE;
+  readonly state: ABORT_STATE;
 
   withHandler<T>(callback: (aapi: AbortApi) => T | PromiseLike<T>, handler: OnAbortCallback): PromiseLike<T>;
 }
