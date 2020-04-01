@@ -6,6 +6,8 @@ import { AbortApiPublic } from "./AbortApiPublic";
 import { Abortable } from './Abortable';
 import { Timeout } from './Timeout';
 import { Process } from './Process';
+import { Deconstructed } from "./Deconstructed";
+import { DeconstructedPromiseLike } from "./DeconstructedPromiseLike";
 
 export {
     AbortablePromiseLike,
@@ -16,5 +18,7 @@ export {
     ABORT_STATE,
     Abortable,
     Timeout,
-    Process
+    Process,
+    Deconstructed,
+    DeconstructedPromiseLike
 }

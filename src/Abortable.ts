@@ -7,8 +7,8 @@ import {Deconstructed} from "./Deconstructed";
 
 export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> {
   public abortWith: (response?: Response<T>) => this;
-  public promise: PromiseLike<T>;
-  public abort: PromiseLike<T>;
+  public promise: Promise<T>;
+  public abort: Promise<T>;
   public timeout?: Timeout<T>;
   public aapi: AbortApi;
 
