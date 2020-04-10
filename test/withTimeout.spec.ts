@@ -7,7 +7,7 @@ chai.use(chaiAsPromised);
 const should = chai.should;
 const expect = chai.expect;
 
-describe('AbortablePromise.withTimeout', () => {
+describe('Abortable.withTimeout', () => {
     it('over time', async () => {
         let abortedEarly = false;
         let abortedLate = false;

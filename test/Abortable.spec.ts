@@ -7,7 +7,7 @@ chai.use(chaiAsPromised);
 const should = chai.should;
 const expect = chai.expect;
 
-describe('AbortablePromise', () => {
+describe('Abortable', () => {
     it('resolve', async () => {
         const value = {};
         const apromise = new Abortable((resolve, reject, aapi) => {

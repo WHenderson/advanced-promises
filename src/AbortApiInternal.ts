@@ -1,4 +1,5 @@
 import {ABORT_STATE, AbortApi, AbortApiInternal as AbortApiInternalInterface, OnAbortCallback} from './AbortApi';
+import {Response} from "./Promise";
 
 export class AbortApiInternal implements AbortApiInternalInterface {
   public handlers: [OnAbortCallback, OnAbortCallback | PromiseLike<OnAbortCallback>][];
@@ -23,5 +24,12 @@ export class AbortApiInternal implements AbortApiInternalInterface {
     }, Promise.resolve());
 
     this.state = ABORT_STATE.ABORTED;
+  }
+
+  public withAutoAbort(aapi: AbortApi): this {
+    aapi.on(() => {
+      this.abort();
+    });
+    return this;
   }
 }
