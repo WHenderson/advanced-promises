@@ -2,7 +2,8 @@
   "name": "advanced-promises",
   "version": "1.0.0",
   "description": "Advanced promise types",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "private": true,
   "devDependencies": {
     "@types/mocha": "^7.0.1",
@@ -36,10 +37,13 @@
   "scripts": {
     "test": "mocha",
     "build": "tsc",
+    "prepublish": "yarn run build && yarn run test",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "doc": "typedoc --out docs src"
   },
   "files": [
-    "src/**/*"
+    "dist/src/**/*"
   ]
+
 }

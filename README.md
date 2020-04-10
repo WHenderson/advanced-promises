@@ -1,5 +1,6 @@
 # advanced-promise
-Advanced promise types for handling cancellation and aborting with no external dependencies.
+Advanced promise types for handling cancellation and aborting.
+Package has no external dependencies.
 
 ## CancellablePromiseLike
 A cancellable promise allows you to stop the promise from ever resolving or rejecting.
@@ -224,8 +225,9 @@ Access the internal promise used for aborting.
 Useful for waiting only on an abort.
 
 ```typescript
-abortable.abort
+abortable.abort : Promise<T>
 ```
+
 
 ### Abortable.this.promise
 
@@ -233,9 +235,8 @@ Access the internal promise.
 
 Useful for waiting on the internal promise, regardless of being aborted
 
-
 ```typescript
-abortable.promise
+abortable.promise : Promise<T>
 ```
 
 ### Abortable.this.aapi
@@ -243,7 +244,7 @@ abortable.promise
 Access the AbortApi 
 
 ```typescript
-abortable.aapi
+abortable.aapi : AbortApi
 ```
 
 ### Timeout
@@ -259,31 +260,35 @@ new Timeout(duration: number, response?: Response<T>)
 ```
 
 **Parameters**
-
+* `duration`
+* `response`
 
 ### Timeout.resolve
 
 ```typescript
-
+Timeout.resolve() : Abortable<void>;
+Timeout.resolve<T>(value?: T | PromiseLike<T>) : Abortable<T>;
 ```
 
 **Parameters**
+* `value`
 
 ### Timeout.reject
 
 ```typescript
-
+Timeout.reject<T = never>(reason?: any) : Abortable<T>;
 ```
+
+**Parameters**
+* `reason`
 
 **Parameters**
 
 ### Timeout.infinite
 
 ```typescript
-
+Timeout.infinite() : Timeout<void>
 ```
-
-**Parameters**
 
 ### Timeout.prototype.withAutoCancel
 
