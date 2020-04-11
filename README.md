@@ -7,6 +7,8 @@ A cancellable promise allows you to stop the promise from ever resolving or reje
 
 Example:
         
+    import { Timeout } from 'advanced-promise';
+        
     // Construct a timeout for 1 second
     const timeout = new Timeout(1000);
     
@@ -21,6 +23,8 @@ An abortable promise provides an API for the caller to request an early abort fr
 The callee can register handlers which will get run if the promise is aborted.
 
 Example:
+
+    import { Abortable } from 'advanced-promise';
 
     const abortable = new Abortable((resolve, reject, aapi) => {
         //.. start long running code ..
@@ -49,6 +53,8 @@ This promise type provides takes no executor and instead provides resolve/reject
 
 Example:
 
+    import { Deconstructed } from 'advanced-promise';
+
     const deconstructed = new Deconstructed();
     
     deconstructed.resolve('my value');
@@ -68,3 +74,6 @@ Npm
 ```shell script
 npm add --save advanced-promises
 ```
+
+## Detailed API documentation
+See [Advanced Promise](https://whenderson.github.io/advanced-promise/) for detailed API documentation
