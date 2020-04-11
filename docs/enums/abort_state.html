@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ResponseResolve | advanced-promises</title>
+	<title>ABORT_STATE | advanced-promises</title>
 	<meta name="description" content="Documentation for advanced-promises">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,54 +54,60 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="responseresolve.html">ResponseResolve</a>
+					<a href="abort_state.html">ABORT_STATE</a>
 				</li>
 			</ul>
-			<h1>Interface ResponseResolve&lt;T&gt;</h1>
+			<h1>Enumeration ABORT_STATE</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T</h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">ResponseResolve</span>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseresolve.html#resolve" class="tsd-kind-icon">resolve</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="abort_state.html#aborted" class="tsd-kind-icon">ABORTED</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="abort_state.html#aborting" class="tsd-kind-icon">ABORTING</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="abort_state.html#none" class="tsd-kind-icon">NONE</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="resolve" class="tsd-anchor"></a>
-					<h3>resolve</h3>
-					<div class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="aborted" class="tsd-anchor"></a>
+					<h3>ABORTED</h3>
+					<div class="tsd-signature tsd-kind-icon">ABORTED<span class="tsd-signature-symbol">:</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/Promise.ts#L4">src/Promise.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L8">src/AbortApi.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="aborting" class="tsd-anchor"></a>
+					<h3>ABORTING</h3>
+					<div class="tsd-signature tsd-kind-icon">ABORTING<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L7">src/AbortApi.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="none" class="tsd-anchor"></a>
+					<h3>NONE</h3>
+					<div class="tsd-signature tsd-kind-icon">NONE<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L6">src/AbortApi.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -117,9 +123,24 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/abort_state.html" class="tsd-kind-icon">ABORT_<wbr>STATE</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-enum">
+						<a href="abort_state.html" class="tsd-kind-icon">ABORT_<wbr>STATE</a>
+						<ul>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="abort_state.html#aborted" class="tsd-kind-icon">ABORTED</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="abort_state.html#aborting" class="tsd-kind-icon">ABORTING</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="abort_state.html#none" class="tsd-kind-icon">NONE</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="../classes/abortapi.html" class="tsd-kind-icon">Abort<wbr>Api</a>
 					</li>
@@ -142,32 +163,23 @@
 						<a href="../classes/timeout.html" class="tsd-kind-icon">Timeout</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="abortablepromiselike.html" class="tsd-kind-icon">Abortable<wbr>Promise<wbr>Like</a>
+						<a href="../interfaces/abortablepromiselike.html" class="tsd-kind-icon">Abortable<wbr>Promise<wbr>Like</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="cancellablepromiselike.html" class="tsd-kind-icon">Cancellable<wbr>Promise<wbr>Like</a>
+						<a href="../interfaces/cancellablepromiselike.html" class="tsd-kind-icon">Cancellable<wbr>Promise<wbr>Like</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="deconstructedpromiselike.html" class="tsd-kind-icon">Deconstructed<wbr>Promise<wbr>Like</a>
+						<a href="../interfaces/deconstructedpromiselike.html" class="tsd-kind-icon">Deconstructed<wbr>Promise<wbr>Like</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="processresponseresolve.html" class="tsd-kind-icon">Process<wbr>Response<wbr>Resolve</a>
+						<a href="../interfaces/processresponseresolve.html" class="tsd-kind-icon">Process<wbr>Response<wbr>Resolve</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="responsereject.html" class="tsd-kind-icon">Response<wbr>Reject</a>
+						<a href="../interfaces/responsereject.html" class="tsd-kind-icon">Response<wbr>Reject</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="responseresolve.html" class="tsd-kind-icon">Response<wbr>Resolve</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseresolve.html#resolve" class="tsd-kind-icon">resolve</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/responseresolve.html" class="tsd-kind-icon">Response<wbr>Resolve</a>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="../globals.html#abortablepromiseexecutor" class="tsd-kind-icon">Abortable<wbr>Promise<wbr>Executor</a>
 					</li>

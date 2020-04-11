@@ -1,6 +1,6 @@
 {
   "mode": "file",
-  "out": "dist/docs",
+  "out": "docs",
   "json": "dist/api.json",
   "includeDeclarations": true,
   "excludeExternals": true,

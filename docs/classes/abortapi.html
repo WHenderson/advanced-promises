@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AbortApiInternal | advanced-promises</title>
+	<title>AbortApi | advanced-promises</title>
 	<meta name="description" content="Documentation for advanced-promises">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="abortapiinternal.html">AbortApiInternal</a>
+					<a href="abortapi.html">AbortApi</a>
 				</li>
 			</ul>
-			<h1>Class AbortApiInternal</h1>
+			<h1>Class AbortApi</h1>
 		</div>
 	</div>
 </header>
@@ -68,20 +68,30 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AbortApiInternal</span>
+						<span class="target">AbortApi</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="abortapipublic.html" class="tsd-signature-type">AbortApiPublic</a>
+							</li>
+							<li>
+								<a href="abortapipublic.html" class="tsd-signature-type">AbortApiPublic</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="abortapiinternal.html" class="tsd-signature-type">AbortApiInternal</a></li>
+					<li><a href="abortapi.html" class="tsd-signature-type">AbortApi</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="abortapiinternal.html" class="tsd-signature-type">AbortApiInternal</a></li>
+					<li><a href="abortapi.html" class="tsd-signature-type">AbortApi</a></li>
+					<li><a href="abortapipublic.html" class="tsd-signature-type">AbortApiPublic</a></li>
+					<li><a href="abortapipublic.html" class="tsd-signature-type">AbortApiPublic</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -91,22 +101,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="abortapiinternal.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="abortapi.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="abortapiinternal.html#aapi" class="tsd-kind-icon">aapi</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="abortapiinternal.html#handlers" class="tsd-kind-icon">handlers</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="abortapiinternal.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="abortapi.html#state" class="tsd-kind-icon">state</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="abortapiinternal.html#abort" class="tsd-kind-icon">abort</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="abortapiinternal.html#withautoabort" class="tsd-kind-icon">with<wbr>Auto<wbr>Abort</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="abortapi.html#off" class="tsd-kind-icon">off</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="abortapi.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="abortapi.html#withhandler" class="tsd-kind-icon">with<wbr>Handler</a></li>
 							</ul>
 						</section>
 					</div>
@@ -118,22 +127,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Abort<wbr>Api<wbr>Internal<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">?: </span><a href="../enums/abort_state.html" class="tsd-signature-type">ABORT_STATE</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="abortapiinternal.html" class="tsd-signature-type">AbortApiInternal</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Abort<wbr>Api<span class="tsd-signature-symbol">(</span>internal<span class="tsd-signature-symbol">: </span><a href="abortapiinternal.html" class="tsd-signature-type">AbortApiInternal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="abortapi.html" class="tsd-signature-type">AbortApi</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApiInternal.ts#L7">src/AbortApiInternal.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L30">src/AbortApi.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> state: <a href="../enums/abort_state.html" class="tsd-signature-type">ABORT_STATE</a><span class="tsd-signature-symbol"> = ABORT_STATE.NONE</span></h5>
+									<h5>internal: <a href="abortapiinternal.html" class="tsd-signature-type">AbortApiInternal</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="abortapiinternal.html" class="tsd-signature-type">AbortApiInternal</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="abortapi.html" class="tsd-signature-type">AbortApi</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -141,35 +150,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="aapi" class="tsd-anchor"></a>
-					<h3>aapi</h3>
-					<div class="tsd-signature tsd-kind-icon">aapi<span class="tsd-signature-symbol">:</span> <a href="abortapi.html" class="tsd-signature-type">AbortApi</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApi.ts#L21">src/AbortApi.ts:21</a></li>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApiInternal.ts#L7">src/AbortApiInternal.ts:7</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="handlers" class="tsd-anchor"></a>
-					<h3>handlers</h3>
-					<div class="tsd-signature tsd-kind-icon">handlers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a><span class="tsd-signature-symbol">, </span><a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApi.ts#L23">src/AbortApi.ts:23</a></li>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApiInternal.ts#L5">src/AbortApiInternal.ts:5</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="state" class="tsd-anchor"></a>
 					<h3>state</h3>
 					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <a href="../enums/abort_state.html" class="tsd-signature-type">ABORT_STATE</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApi.ts#L22">src/AbortApi.ts:22</a></li>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApiInternal.ts#L6">src/AbortApiInternal.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L15">src/AbortApi.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,42 +163,101 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="abort" class="tsd-anchor"></a>
-					<h3>abort</h3>
+					<a name="off" class="tsd-anchor"></a>
+					<h3>off</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">abort<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#onaborthandle" class="tsd-signature-type">OnAbortHandle</a>, ignoreNotFound<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApi.ts#L25">src/AbortApi.ts:25</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="withautoabort" class="tsd-anchor"></a>
-					<h3>with<wbr>Auto<wbr>Abort</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">with<wbr>Auto<wbr>Abort<span class="tsd-signature-symbol">(</span>aapi<span class="tsd-signature-symbol">: </span><a href="abortapi.html" class="tsd-signature-type">AbortApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortApiInternal.ts#L29">src/AbortApiInternal.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L13">src/AbortApi.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>aapi: <a href="abortapi.html" class="tsd-signature-type">AbortApi</a></h5>
+									<h5>handle: <a href="../globals.html#onaborthandle" class="tsd-signature-type">OnAbortHandle</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> ignoreNotFound: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="on" class="tsd-anchor"></a>
+					<h3>on</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>cb<span class="tsd-signature-symbol">: </span><a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#onaborthandle" class="tsd-signature-type">OnAbortHandle</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L12">src/AbortApi.ts:12</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cb: <a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#onaborthandle" class="tsd-signature-type">OnAbortHandle</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="withhandler" class="tsd-anchor"></a>
+					<h3>with<wbr>Handler</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">with<wbr>Handler&lt;T&gt;<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>aapi<span class="tsd-signature-symbol">: </span><a href="abortapi.html" class="tsd-signature-type">AbortApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, handler<span class="tsd-signature-symbol">: </span><a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/AbortApi.ts#L17">src/AbortApi.ts:17</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>aapi<span class="tsd-signature-symbol">: </span><a href="abortapi.html" class="tsd-signature-type">AbortApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>aapi<span class="tsd-signature-symbol">: </span><a href="abortapi.html" class="tsd-signature-type">AbortApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>aapi: <a href="abortapi.html" class="tsd-signature-type">AbortApi</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5>handler: <a href="../globals.html#onabortcallback" class="tsd-signature-type">OnAbortCallback</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -231,36 +276,33 @@
 					<li class=" tsd-kind-enum">
 						<a href="../enums/abort_state.html" class="tsd-kind-icon">ABORT_<wbr>STATE</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="abortapi.html" class="tsd-kind-icon">Abort<wbr>Api</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="abortapiinternal.html" class="tsd-kind-icon">Abort<wbr>Api<wbr>Internal</a>
+						<a href="abortapi.html" class="tsd-kind-icon">Abort<wbr>Api</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="abortapiinternal.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="abortapi.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="abortapiinternal.html#aapi" class="tsd-kind-icon">aapi</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="abortapiinternal.html#handlers" class="tsd-kind-icon">handlers</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="abortapiinternal.html#state" class="tsd-kind-icon">state</a>
+								<a href="abortapi.html#state" class="tsd-kind-icon">state</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="abortapiinternal.html#abort" class="tsd-kind-icon">abort</a>
+								<a href="abortapi.html#off" class="tsd-kind-icon">off</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="abortapiinternal.html#withautoabort" class="tsd-kind-icon">with<wbr>Auto<wbr>Abort</a>
+								<a href="abortapi.html#on" class="tsd-kind-icon">on</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="abortapi.html#withhandler" class="tsd-kind-icon">with<wbr>Handler</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="abortapiinternal.html" class="tsd-kind-icon">Abort<wbr>Api<wbr>Internal</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="abortapipublic.html" class="tsd-kind-icon">Abort<wbr>Api<wbr>Public</a>
 					</li>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AbortablePromiseLike | advanced-promises</title>
+	<title>CancellablePromiseLike | advanced-promises</title>
 	<meta name="description" content="Documentation for advanced-promises">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="abortablepromiselike.html">AbortablePromiseLike</a>
+					<a href="cancellablepromiselike.html">CancellablePromiseLike</a>
 				</li>
 			</ul>
-			<h1>Interface AbortablePromiseLike&lt;T&gt;</h1>
+			<h1>Interface CancellablePromiseLike&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -79,7 +79,7 @@
 						<a href="cancellablepromiselike.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">AbortablePromiseLike</span>
+								<span class="target">CancellablePromiseLike</span>
 							</li>
 						</ul>
 					</li>
@@ -88,8 +88,6 @@
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/abortable.html" class="tsd-signature-type">Abortable</a></li>
-					<li><a href="../classes/process.html" class="tsd-signature-type">Process</a></li>
 					<li><a href="../classes/timeout.html" class="tsd-signature-type">Timeout</a></li>
 				</ul>
 			</section>
@@ -100,19 +98,18 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="abortablepromiselike.html#promise" class="tsd-kind-icon">Promise</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="abortablepromiselike.html#_symbol_tostringtag_" class="tsd-kind-icon">[<wbr>Symbol.to<wbr>String<wbr>Tag]</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="abortablepromiselike.html#aapi" class="tsd-kind-icon">aapi</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cancellablepromiselike.html#promise" class="tsd-kind-icon">Promise</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="cancellablepromiselike.html#_symbol_tostringtag_" class="tsd-kind-icon">[<wbr>Symbol.to<wbr>String<wbr>Tag]</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="abortablepromiselike.html#abortwith" class="tsd-kind-icon">abort<wbr>With</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited"><a href="abortablepromiselike.html#catch" class="tsd-kind-icon">catch</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="abortablepromiselike.html#finally" class="tsd-kind-icon">finally</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited"><a href="abortablepromiselike.html#then" class="tsd-kind-icon">then</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="abortablepromiselike.html#withautoabort" class="tsd-kind-icon">with<wbr>Auto<wbr>Abort</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="cancellablepromiselike.html#cancel" class="tsd-kind-icon">cancel</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited"><a href="cancellablepromiselike.html#catch" class="tsd-kind-icon">catch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="cancellablepromiselike.html#finally" class="tsd-kind-icon">finally</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited"><a href="cancellablepromiselike.html#then" class="tsd-kind-icon">then</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="cancellablepromiselike.html#withautocancel" class="tsd-kind-icon">with<wbr>Auto<wbr>Cancel</a></li>
 							</ul>
 						</section>
 					</div>
@@ -141,39 +138,23 @@
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="aapi" class="tsd-anchor"></a>
-					<h3>aapi</h3>
-					<div class="tsd-signature tsd-kind-icon">aapi<span class="tsd-signature-symbol">:</span> <a href="../classes/abortapi.html" class="tsd-signature-type">AbortApi</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortablePromiseLike.ts#L15">src/AbortablePromiseLike.ts:15</a></li>
-						</ul>
-					</aside>
-				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="abortwith" class="tsd-anchor"></a>
-					<h3>abort<wbr>With</h3>
+					<a name="cancel" class="tsd-anchor"></a>
+					<h3>cancel</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">abort<wbr>With<span class="tsd-signature-symbol">(</span>response<span class="tsd-signature-symbol">?: </span><a href="../globals.html#response" class="tsd-signature-type">Response</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">cancel<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="cancellablepromiselike.html" class="tsd-signature-type">CancellablePromiseLike</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortablePromiseLike.ts#L12">src/AbortablePromiseLike.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/CancellablePromiseLike.ts#L4">src/CancellablePromiseLike.ts:4</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> response: <a href="../globals.html#response" class="tsd-signature-type">Response</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="cancellablepromiselike.html" class="tsd-signature-type">CancellablePromiseLike</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -299,16 +280,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="withautoabort" class="tsd-anchor"></a>
-					<h3>with<wbr>Auto<wbr>Abort</h3>
+					<a name="withautocancel" class="tsd-anchor"></a>
+					<h3>with<wbr>Auto<wbr>Cancel</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">with<wbr>Auto<wbr>Abort<span class="tsd-signature-symbol">(</span>aapi<span class="tsd-signature-symbol">: </span><a href="../classes/abortapi.html" class="tsd-signature-type">AbortApi</a>, response<span class="tsd-signature-symbol">?: </span><a href="../globals.html#response" class="tsd-signature-type">Response</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">with<wbr>Auto<wbr>Cancel<span class="tsd-signature-symbol">(</span>aapi<span class="tsd-signature-symbol">: </span><a href="../classes/abortapi.html" class="tsd-signature-type">AbortApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="cancellablepromiselike.html" class="tsd-signature-type">CancellablePromiseLike</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/31466b3/src/AbortablePromiseLike.ts#L18">src/AbortablePromiseLike.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/WHenderson/advanced-promise/blob/abf4d78/src/CancellablePromiseLike.ts#L7">src/CancellablePromiseLike.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -316,11 +297,8 @@
 								<li>
 									<h5>aapi: <a href="../classes/abortapi.html" class="tsd-signature-type">AbortApi</a></h5>
 								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> response: <a href="../globals.html#response" class="tsd-signature-type">Response</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="cancellablepromiselike.html" class="tsd-signature-type">CancellablePromiseLike</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -360,42 +338,39 @@
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="../classes/timeout.html" class="tsd-kind-icon">Timeout</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="abortablepromiselike.html" class="tsd-kind-icon">Abortable<wbr>Promise<wbr>Like</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="abortablepromiselike.html" class="tsd-kind-icon">Abortable<wbr>Promise<wbr>Like</a>
+						<a href="cancellablepromiselike.html" class="tsd-kind-icon">Cancellable<wbr>Promise<wbr>Like</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="abortablepromiselike.html#promise" class="tsd-kind-icon">Promise</a>
+								<a href="cancellablepromiselike.html#promise" class="tsd-kind-icon">Promise</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="abortablepromiselike.html#_symbol_tostringtag_" class="tsd-kind-icon">[<wbr>Symbol.to<wbr>String<wbr>Tag]</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="abortablepromiselike.html#aapi" class="tsd-kind-icon">aapi</a>
+								<a href="cancellablepromiselike.html#_symbol_tostringtag_" class="tsd-kind-icon">[<wbr>Symbol.to<wbr>String<wbr>Tag]</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="abortablepromiselike.html#abortwith" class="tsd-kind-icon">abort<wbr>With</a>
+								<a href="cancellablepromiselike.html#cancel" class="tsd-kind-icon">cancel</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited">
-								<a href="abortablepromiselike.html#catch" class="tsd-kind-icon">catch</a>
+								<a href="cancellablepromiselike.html#catch" class="tsd-kind-icon">catch</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="abortablepromiselike.html#finally" class="tsd-kind-icon">finally</a>
+								<a href="cancellablepromiselike.html#finally" class="tsd-kind-icon">finally</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter tsd-is-inherited">
-								<a href="abortablepromiselike.html#then" class="tsd-kind-icon">then</a>
+								<a href="cancellablepromiselike.html#then" class="tsd-kind-icon">then</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="abortablepromiselike.html#withautoabort" class="tsd-kind-icon">with<wbr>Auto<wbr>Abort</a>
+								<a href="cancellablepromiselike.html#withautocancel" class="tsd-kind-icon">with<wbr>Auto<wbr>Cancel</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="cancellablepromiselike.html" class="tsd-kind-icon">Cancellable<wbr>Promise<wbr>Like</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="deconstructedpromiselike.html" class="tsd-kind-icon">Deconstructed<wbr>Promise<wbr>Like</a>
 					</li>
