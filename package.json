@@ -4,7 +4,7 @@
   "description": "Advanced promise types",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@types/mocha": "^7.0.1",
     "@types/node": "^13.7.0",
