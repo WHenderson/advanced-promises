@@ -15,7 +15,8 @@
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-no-unused-expression-chai": "^0.1.4",
-    "typescript": "^3.7.5"
+    "typedoc": "^0.17.4",
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",
@@ -36,14 +37,16 @@
   },
   "scripts": {
     "test": "mocha",
-    "build": "tsc",
+    "build-src": "tsc",
+    "build-doc": "typedoc",
+    "build": "yarn run build-src && yarn run build-doc",
     "prepublish": "yarn run build && yarn run test",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "doc": "typedoc --out docs src"
+    "lint": "tslint -p tsconfig.json"
   },
   "files": [
-    "dist/src/**/*"
+    "dist/src/**/*",
+    "dist/docs/**/*",
+    "dist/api.json"
   ]
-
 }
