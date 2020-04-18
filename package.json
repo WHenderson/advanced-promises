@@ -43,10 +43,11 @@
     "email": "whenderson.github@gmail.com"
   },
   "scripts": {
-    "test": "mocha",
     "build-src": "tsc",
     "build-doc": "typedoc",
     "build": "yarn run build-src && yarn run build-doc",
+    "pretest": "yarn run build-src",
+    "test": "mocha",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
