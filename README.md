@@ -1,4 +1,4 @@
-# advanced-promise
+# advanced-promises
 Advanced promise types for handling cancellation and aborting.
 Package has no external dependencies.
 
