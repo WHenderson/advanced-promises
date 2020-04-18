@@ -1,3 +1,3 @@
 {
-  "spec": "test/**/*.spec.js"
+  "spec": "dist/test/**/*.spec.js"
 }
