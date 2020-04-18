@@ -40,7 +40,7 @@
     "build-src": "tsc",
     "build-doc": "typedoc",
     "build": "yarn run build-src && yarn run build-doc",
-    "prepublishOnly": "yarn run build && yarn run test",
+    "prepare": "yarn run build",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
