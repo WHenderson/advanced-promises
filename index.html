@@ -67,8 +67,18 @@
 				</a>
 				<p>Advanced promise types for handling cancellation and aborting.
 				Package has no external dependencies.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>Yarn</p>
+				<pre><code class="language-shell">yarn add advanced-promises</code></pre>
+				<p>Npm</p>
+				<pre><code class="language-shell">npm add --save advanced-promises</code></pre>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
 				<a href="#cancellable-promises" id="cancellable-promises" style="color: inherit; text-decoration: none;">
-					<h2>Cancellable Promises</h2>
+					<h3>Cancellable Promises</h3>
 				</a>
 				<p>A cancellable promise allows you to stop the promise from ever resolving or rejecting.</p>
 				<p>Example:</p>
@@ -81,9 +91,9 @@
 timeout.cancel();
 
 <span class="hljs-comment">// This will never resolve</span>
-<span class="hljs-keyword">await</span> promise;  </code></pre>
+<span class="hljs-keyword">await</span> timeout;  </code></pre>
 				<a href="#abortable-promises" id="abortable-promises" style="color: inherit; text-decoration: none;">
-					<h2>Abortable Promises</h2>
+					<h3>Abortable Promises</h3>
 				</a>
 				<p>An abortable promise provides an API for the caller to request an early abort from the callee.
 				The callee can register handlers which will get run if the promise is aborted.</p>
@@ -98,7 +108,10 @@ timeout.cancel();
     });
 
     <span class="hljs-comment">//.. wait for long running code ...</span>
-);
+    <span class="hljs-keyword">new</span> Timeout(<span class="hljs-number">50</span>).then(() =&gt; {
+        resolve(<span class="hljs-string">'real result'</span>);
+    });
+});
 
 <span class="hljs-comment">// request an abort and wait until handlers have run</span>
 <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> abortable.abortWith({ resolve: <span class="hljs-string">'my value'</span>});
@@ -109,9 +122,10 @@ timeout.cancel();
 <span class="hljs-comment">// wait for the wrapped promise to complete</span>
 <span class="hljs-comment">// EcmaScript has no facility for forcefully terminating a promise early</span>
 <span class="hljs-comment">// It's often best to wait for the internal promise</span>
-<span class="hljs-keyword">await</span> abortable.promise;</code></pre>
+<span class="hljs-keyword">const</span> realRes = <span class="hljs-keyword">await</span> abortable.promise;
+<span class="hljs-keyword">assert</span>(realRes === <span class="hljs-string">'real result'</span>);</code></pre>
 				<a href="#deconstructed-promise" id="deconstructed-promise" style="color: inherit; text-decoration: none;">
-					<h2>Deconstructed Promise</h2>
+					<h3>Deconstructed Promise</h3>
 				</a>
 				<p>It is often useful to define the resolve/reject semantics of a promise outside of the executor function.
 				This promise type provides takes no executor and instead provides resolve/reject handlers as instance properties.</p>
@@ -122,18 +136,11 @@ timeout.cancel();
 
 deconstructed.resolve(<span class="hljs-string">'my value'</span>);
 
-<span class="hljs-keyword">const</span> res = <span class="hljs-function">await <span class="hljs-title">deconstructed</span><span class="hljs-params">()</span></span>;
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> deconstructed;
 
 <span class="hljs-keyword">assert</span>(res === <span class="hljs-string">'my value'</span>);</code></pre>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>Yarn</p>
-				<pre><code class="language-shell">yarn add advanced-promises</code></pre>
-				<p>Npm</p>
-				<pre><code class="language-shell">npm add --save advanced-promises</code></pre>
 				<a href="#detailed-api-documentation" id="detailed-api-documentation" style="color: inherit; text-decoration: none;">
-					<h2>Detailed API documentation</h2>
+					<h3>Detailed API documentation</h3>
 				</a>
 				<p>See <a href="https://whenderson.github.io/advanced-promise/">Advanced Promise</a> for detailed API documentation</p>
 			</div>
