@@ -66,11 +66,13 @@ Example:
 ## Installation
 
 Yarn
+
 ```shell script
 yarn add advanced-promises
 ```
 
 Npm
+
 ```shell script
 npm add --save advanced-promises
 ```
