@@ -30,7 +30,7 @@
     "timeout",
     "process"
   ],
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "author": {
     "name": "Will Henderson",
     "email": "whenderson.github@gmail.com"
