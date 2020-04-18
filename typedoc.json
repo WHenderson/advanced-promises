@@ -1,0 +1,10 @@
+{
+  "mode": "file",
+  "out": "docs",
+  "json": "dist/api.json",
+  "includeDeclarations": true,
+  "excludeExternals": true,
+  "inputFiles": [
+    "src/index.ts"
+  ]
+}

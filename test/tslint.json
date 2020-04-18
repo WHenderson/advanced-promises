@@ -1,0 +1,7 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-no-unused-expression-chai"],
+  "rules": {
+    "no-bitwise": false,
+    "no-shadowed-variable": false
+  }
+}
