@@ -115,6 +115,7 @@ export class Abortable<T> extends Promise<T> implements AbortablePromiseLike<T> 
       return r;
     };
     r.abort = afinally;
+    (r as any).p = p;
     r.promise = pfinally;
     r.aapi = iapi.aapi;
 

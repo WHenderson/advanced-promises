@@ -2,7 +2,23 @@
 Advanced promise types for handling cancellation and aborting.
 Package has no external dependencies.
 
-## Cancellable Promises
+## Installation
+
+Yarn
+
+```shell script
+yarn add advanced-promises
+```
+
+Npm
+
+```shell script
+npm add --save advanced-promises
+```
+
+## Examples
+
+### Cancellable Promises
 A cancellable promise allows you to stop the promise from ever resolving or rejecting.
 
 Example:
@@ -16,9 +32,9 @@ Example:
     timeout.cancel();
     
     // This will never resolve
-    await promise;  
+    await timeout;  
 
-## Abortable Promises
+### Abortable Promises
 An abortable promise provides an API for the caller to request an early abort from the callee.
 The callee can register handlers which will get run if the promise is aborted.
 
@@ -34,7 +50,10 @@ Example:
         });
         
         //.. wait for long running code ...
-    );
+        new Timeout(50).then(() => {
+            resolve('real result');
+        });
+    });
     
     // request an abort and wait until handlers have run
     const res = await abortable.abortWith({ resolve: 'my value'});
@@ -45,9 +64,10 @@ Example:
     // wait for the wrapped promise to complete
     // EcmaScript has no facility for forcefully terminating a promise early
     // It's often best to wait for the internal promise
-    await abortable.promise;
+    const realRes = await abortable.promise;
+    assert(realRes === 'real result');
 
-## Deconstructed Promise
+### Deconstructed Promise
 It is often useful to define the resolve/reject semantics of a promise outside of the executor function.
 This promise type provides takes no executor and instead provides resolve/reject handlers as instance properties.
 
@@ -59,23 +79,9 @@ Example:
     
     deconstructed.resolve('my value');
     
-    const res = await deconstructed();
+    const res = await deconstructed;
     
     assert(res === 'my value');
 
-## Installation
-
-Yarn
-
-```shell script
-yarn add advanced-promises
-```
-
-Npm
-
-```shell script
-npm add --save advanced-promises
-```
-
-## Detailed API documentation
+### Detailed API documentation
 See [Advanced Promise](https://whenderson.github.io/advanced-promise/) for detailed API documentation
