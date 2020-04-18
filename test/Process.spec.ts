@@ -37,13 +37,13 @@ describe('Process', function () {
             {
                 env: Object.assign({}, process.env, {
                     MY_DURATION: '10',
-                    MY_EXIT: '-1'
+                    MY_EXIT: '1'
                 })
             }
         ));
 
         expect(response).to.be.ok;
-        expect(response.code).to.be.equal(-1 >>> 0);
+        expect(response.code).to.be.equal(1);
         expect(response.signal).to.be.null;
     });
 
