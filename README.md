@@ -1,4 +1,4 @@
-# advanced-promise
+# advanced-promises
 Advanced promise types for handling cancellation and aborting.
 Package has no external dependencies.
 
@@ -66,11 +66,13 @@ Example:
 ## Installation
 
 Yarn
+
 ```shell script
 yarn add advanced-promises
 ```
 
 Npm
+
 ```shell script
 npm add --save advanced-promises
 ```
