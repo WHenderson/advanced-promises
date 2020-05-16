@@ -6,8 +6,8 @@ node_js:
 jobs:
   include:
     - stage: npm release
+      if: branch = master
       node_js: lts/*
-      script: echo "Deploying to npm..."
       deploy:
         provider: npm
         api_token: $NPM_API_KEY
@@ -16,8 +16,9 @@ jobs:
         on:
           branch: master
     - stage: gh-pages release
+      if: branch = master
       node_js: lts/*
-      script: echo "Deploying to github pages..."
+      script: yarn run build:doc
       deploy:
         provider: pages:git
         token: $GITHUB_TOKEN

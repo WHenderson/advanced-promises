@@ -1,6 +1,6 @@
 {
   "name": "advanced-promises",
-  "version": "1.0.0-beta.10",
+  "version": "1.0.0-beta.11",
   "description": "Advanced promise types",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -48,7 +48,7 @@
     "build": "yarn run build:src && yarn run build:doc",
     "pretest": "yarn run build:src",
     "test": "mocha",
-    "prepublishOnly": "yarn run build",
+    "prepublishOnly": "yarn run build:src",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
