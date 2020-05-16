@@ -1,19 +1,29 @@
 language: node_js
 node_js:
-  - 11
-deploy:
-  - provider: npm
-    api_token: $NPM_API_KEY
-    edge: true # opt in to dpl v2
-    email: whenderson.github+npm@gmail.com
-    on:
-      branch: master
-  - provider: pages:git
-    token: $GITHUB_TOKEN
-    local_dir: docs
-    edge: true
-    on:
-      branch: master
+  - node
+  - lts/*
 
+jobs:
+  include:
+    - stage: npm release
+      node_js: lts/*
+      script: echo "Deploying to npm..."
+      deploy:
+        provider: npm
+        api_token: $NPM_API_KEY
+        edge: true # opt in to dpl v2
+        email: whenderson.github+npm@gmail.com
+        on:
+          branch: master
+    - stage: gh-pages release
+      node_js: lts/*
+      script: echo "Deploying to github pages..."
+      deploy:
+        provider: pages:git
+        token: $GITHUB_TOKEN
+        local_dir: docs
+        edge: true
+        on:
+          branch: master
 
 

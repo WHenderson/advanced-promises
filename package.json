@@ -1,6 +1,6 @@
 {
   "name": "advanced-promises",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "description": "Advanced promise types",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -43,12 +43,12 @@
     "email": "whenderson.github@gmail.com"
   },
   "scripts": {
-    "build-src": "tsc",
-    "build-doc": "typedoc",
-    "build": "yarn run build-src && yarn run build-doc",
-    "pretest": "yarn run build-src",
+    "build:src": "tsc",
+    "build:doc": "typedoc",
+    "build": "yarn run build:src && yarn run build:doc",
+    "pretest": "yarn run build:src",
     "test": "mocha",
-    "prepublishOnly": "yarn run build-doc",
+    "prepublishOnly": "yarn run build",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
