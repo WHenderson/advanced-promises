@@ -1,6 +1,6 @@
 {
   "name": "advanced-promises",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.13",
   "description": "Advanced promise types",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -20,9 +20,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/WHenderson/advanced-promise.git"
+    "url": "https://github.com/WHenderson/advanced-promises.git"
   },
-  "homepage": "https://github.com/WHenderson/advanced-promise#readme",
+  "homepage": "https://github.com/WHenderson/advanced-promises#readme",
   "keywords": [
     "promise",
     "promises",
@@ -35,7 +35,7 @@
     "process",
     "process promise",
     "async",
-    "advanced-promise"
+    "advanced-promises"
   ],
   "license": "Apache-2.0",
   "author": {
